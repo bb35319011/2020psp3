@@ -65,7 +65,14 @@ int LoadData(City arrayCity[])
 int LinearSearch(int key, City arrayCity[], int size)
 {
     //  ここを実装する
+    int i;
+    for(i=0; i<size; i++)
+    {
+        if(arrayCity[i].id == key)
+            return i;
+    }
 
+    return -1; //一致IDなし
 
 }
 
