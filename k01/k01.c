@@ -79,7 +79,24 @@ int LinearSearch(int key, City arrayCity[], int size)
 int BinarySearch(int key, City arrayCity[], int left, int right)
 {
     //  ここを実装する
+    int i;//index
+    
+    while (left <= right)
+    {
+        i = (left+right)/2;
 
+        if(key == arrayCity[i].id){
+            return i;
+        }
+        
+        if(key < arrayCity[i].id){
+            right = i-1;
+        }else{
+            left = i+1;
+        }
+    }
+
+    return -1;//一致なし
 
 }
 
