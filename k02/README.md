@@ -69,6 +69,11 @@ typedef struct {
     - return値: IDが合致した配列データのindex。IDが一致するデータがない場合は-1。
 
 ## ソースコードの説明
+関数InsertNewNodeの実装
+    新しくnewnodeのメモリを確保しCityデータとPNextデータを代入。確保したメモリの先頭アドレスをreturnする。
+
+関数SearchCityByIDの実装
+    カウント用変数iとNodeポインタを用意して先頭から探索を行う。一致したidがあった場合、受け取ったCityアドレスの中身にデータを代入し、その時のカウンタをリターンする。
 
 
 
