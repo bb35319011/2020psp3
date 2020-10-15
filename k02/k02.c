@@ -162,7 +162,6 @@ int main(void)
     printf("City ID?");
     scanf("%d", &key);
     cn = SearchCityByID(pTop, key, &city);
-    printf("%x\n",&city);    //デバッグ
     if (cn != -1) {
         printf("the city was found at %d\n", cn);
         PrintCity(city);
