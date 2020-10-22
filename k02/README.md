@@ -75,6 +75,9 @@ typedef struct {
 関数SearchCityByIDの実装
     カウント用変数iとNodeポインタを用意して先頭から探索を行う。一致したidがあった場合、受け取ったCityアドレスの中身にデータを代入し、その時のカウンタをリターンする。
 
+関数SearchCityByNameの実装
+    カウント用変数iとNodeポインタを用意してID探索の時と同様に先頭から探索を行う（文字列の比較には関数strcmpを用いた）。名前が一致した場合はそのcityデータを受け取ったcity型ポインタの中身に格納してメイン関数でも利用できるようにし、その時のカウンタをリターンする。
+
 
 
 ## 出力結果
@@ -104,9 +107,12 @@ typedef struct {
 42201, 長崎県, 長崎市, 429508, 198716, 230792
 print list. items = 21
 ===== Print End =====
-City ID?42204
-the city was found at 17
-42204, 長崎県, 諫早市, 138078, 65029, 73049
+City ID?42307
+the city was found at 7
+42307, NagasakiKen, Nagayo, 42548, 20090, 22458
+City Name?Saikai
+the city was found at 10
+42212, NagasakiKen, Saikai, 28691, 14032, 14659
 free list. items = 21
 
 ```
