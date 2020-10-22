@@ -19,8 +19,8 @@ typedef struct node_data {
 } Node;
 
 #define DEBUG
-//#define CHALLENGE1
-//#define CHALLENGE2
+#define CHALLENGE1
+#define CHALLENGE2
 
 #define SUCCESS 1
 #define ERROR   0
@@ -84,21 +84,71 @@ Node* InsertNewNode(City newCity, Node* pNext)
     return newnode;
 }
 
-#ifdef CHALLENGE1
+#ifdef CHALLENGE2
 int DeleteNodeAt(Node** ppNode, int cn)
 {
     //  チャレンジ問題1
     //  ここを実装する
+    int i;
+    Node *pNode = *ppNode;//ppNodeの中身
+    Node *pPrev;
+
+    if(cn==0)//list一番目を消すとき
+    {
+        *ppNode=pNode->pNext;
+        free(pNode);
+
+        return SUCCESS;
+
+    }else{//list二番目以降を消すとき
+        i=0;
+        while (pNode->pNext != NULL)
+        {
+            if(i == cn){
+                break;
+            }
+
+            pPrev=pNode;
+            pNode=pNode->pNext;
+
+            i++;
+        }
+        
+        
+        pPrev->pNext = pNode->pNext;
+        free(pNode);
+
+        return SUCCESS;
+    }
+    
+    return ERROR;
 
 }
 #endif
 
-#ifdef CHALLENGE2
+#ifdef CHALLENGE1
 int SearchCityByName(Node* pList, char* cityName, City* pCity)
 {
     //  チャレンジ問題2
     //  ここを実装する
+    int i=0;
+    Node *pNode = pList;
 
+    while (pNode->pNext != NULL)
+    {
+        //printf("%s = %s ?\n",pNode->city.name,cityName);
+        if(!strcmp(pNode->city.name,cityName))
+        { 
+            *pCity= pNode->city;
+            return i;
+        }
+
+        //NextデータをpNodeに保持
+        pNode = pNode->pNext;
+        i++;
+    }
+
+    return-1;
 }
 #endif
 
@@ -131,7 +181,7 @@ int main(void)
     FILE* fp;
     int key;
 
-    fp = fopen("nagasaki.csv","r");
+    fp = fopen("nagasaki2.csv","r");
     if(fp==NULL){
         fputs("File open error\n",stderr);
         exit(EXIT_FAILURE);
@@ -174,6 +224,7 @@ int main(void)
     char name[32];
     printf("City Name?");
     scanf("%s", name);
+    //printf("get name:%s\n",name);    //デバッグ
     cn = SearchCityByName(pTop, name, &city);
     if (cn != -1) {
         printf("the city was found at %d\n", cn);
