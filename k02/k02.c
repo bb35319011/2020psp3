@@ -20,7 +20,7 @@ typedef struct node_data {
 
 #define DEBUG
 #define CHALLENGE1
-//#define CHALLENGE2
+#define CHALLENGE2
 
 #define SUCCESS 1
 #define ERROR   0
@@ -89,6 +89,39 @@ int DeleteNodeAt(Node** ppNode, int cn)
 {
     //  チャレンジ問題1
     //  ここを実装する
+    int i;
+    Node *pNode = *ppNode;//ppNodeの中身
+    Node *pPrev;
+
+    if(cn==0)//list一番目を消すとき
+    {
+        *ppNode=pNode->pNext;
+        free(pNode);
+
+        return SUCCESS;
+
+    }else{//list二番目以降を消すとき
+        i=0;
+        while (pNode->pNext != NULL)
+        {
+            if(i == cn){
+                break;
+            }
+
+            pPrev=pNode;
+            pNode=pNode->pNext;
+
+            i++;
+        }
+        
+        
+        pPrev->pNext = pNode->pNext;
+        free(pNode);
+
+        return SUCCESS;
+    }
+    
+    return ERROR;
 
 }
 #endif

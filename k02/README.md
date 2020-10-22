@@ -78,42 +78,91 @@ typedef struct {
 関数SearchCityByNameの実装
     カウント用変数iとNodeポインタを用意してID探索の時と同様に先頭から探索を行う（文字列の比較には関数strcmpを用いた）。名前が一致した場合はそのcityデータを受け取ったcity型ポインタの中身に格納してメイン関数でも利用できるようにし、その時のカウンタをリターンする。
 
+関数DeleteNodeAtの実装
+    要素の位置(先頭を0とする)を指定して要素の削除を行う。リスト一番目の削除をうまく処理できなかったので、一番目を消すときと2番目以降を消すときの2つを分けて考えた。
+    一番目を消すときは受け取ったPPNodeの中身に直接2番目のアドレスを渡してメモリ開放を行った
+    二番目以降を消すときはpPrevとpNodeを用いて連続しているリストのアドレスを保持し、削除を行うひとつ前の要素（pPrev）のpNextを、削除を行う要素（pNode）のpNextに繋ぎ直してメモリ開放を行った。
+
 
 
 ## 出力結果
 
 ```
+42201, NagasakiKen, Nagasaki, 429508, 198716, 230792
+42202, NagasakiKen, Sasebo, 255439, 120198, 135241
+42203, NagasakiKen, Shimabara, 45436, 20999, 24437
+42204, NagasakiKen, Isahaya, 138078, 65029, 73049
+42205, NagasakiKen, Omura, 92757, 43938, 48819
+42207, NagasakiKen, Hirado, 31920, 14874, 17046
+42208, NagasakiKen, Matsuura, 23309, 11164, 12145
+42209, NagasakiKen, Tsushima, 31457, 15361, 16096
+42210, NagasakiKen, Iki, 27103, 12860, 14243
+42211, NagasakiKen, Goto, 37327, 17339, 19988
+42212, NagasakiKen, Saikai, 28691, 14032, 14659
+42213, NagasakiKen, Unzen, 44115, 20847, 23268
+42214, NagasakiKen, MinamiShimabara, 46535, 21574, 24961
+42307, NagasakiKen, Nagayo, 42548, 20090, 22458
+42308, NagasakiKen, Togitsu, 29804, 14326, 15478
+42321, NagasakiKen, HigashiSonogi, 8298, 3886, 4412
+42322, NagasakiKen, Kawatana, 14067, 6656, 7411
+42323, NagasakiKen, Hasami, 14891, 7079, 7812
+42383, NagasakiKen, Ojika, 2560, 1172, 1388
+42391, NagasakiKen, Sasa, 13626, 6426, 7200
+42411, NagasakiKen, ShinKamigoto, 19718, 9197, 10521
 ===== Start Printing =====
-42411, 長崎県, 新上五島町, 19718, 9197, 10521
-42391, 長崎県, 佐々町, 13626, 6426, 7200
-42383, 長崎県, 小値賀町, 2560, 1172, 1388
-42323, 長崎県, 波佐見町, 14891, 7079, 7812
-42322, 長崎県, 川棚町, 14067, 6656, 7411
-42321, 長崎県, 東彼杵町, 8298, 3886, 4412
-42308, 長崎県, 時津町, 29804, 14326, 15478
-42307, 長崎県, 長与町, 42548, 20090, 22458
-42214, 長崎県, 南島原市, 46535, 21574, 24961
-42213, 長崎県, 雲仙市, 44115, 20847, 23268
-42212, 長崎県, 西海市, 28691, 14032, 14659
-42211, 長崎県, 五島市, 37327, 17339, 19988
-42210, 長崎県, 壱岐市, 27103, 12860, 14243
-42209, 長崎県, 対馬市, 31457, 15361, 16096
-42208, 長崎県, 松浦市, 23309, 11164, 12145
-42207, 長崎県, 平戸市, 31920, 14874, 17046
-42205, 長崎県, 大村市, 92757, 43938, 48819
-42204, 長崎県, 諫早市, 138078, 65029, 73049
-42203, 長崎県, 島原市, 45436, 20999, 24437
-42202, 長崎県, 佐世保市, 255439, 120198, 135241
-42201, 長崎県, 長崎市, 429508, 198716, 230792
+42411, NagasakiKen, ShinKamigoto, 19718, 9197, 10521
+42391, NagasakiKen, Sasa, 13626, 6426, 7200
+42383, NagasakiKen, Ojika, 2560, 1172, 1388
+42323, NagasakiKen, Hasami, 14891, 7079, 7812
+42322, NagasakiKen, Kawatana, 14067, 6656, 7411
+42321, NagasakiKen, HigashiSonogi, 8298, 3886, 4412
+42308, NagasakiKen, Togitsu, 29804, 14326, 15478
+42307, NagasakiKen, Nagayo, 42548, 20090, 22458
+42214, NagasakiKen, MinamiShimabara, 46535, 21574, 24961
+42213, NagasakiKen, Unzen, 44115, 20847, 23268
+42212, NagasakiKen, Saikai, 28691, 14032, 14659
+42211, NagasakiKen, Goto, 37327, 17339, 19988
+42210, NagasakiKen, Iki, 27103, 12860, 14243
+42209, NagasakiKen, Tsushima, 31457, 15361, 16096
+42208, NagasakiKen, Matsuura, 23309, 11164, 12145
+42207, NagasakiKen, Hirado, 31920, 14874, 17046
+42205, NagasakiKen, Omura, 92757, 43938, 48819
+42204, NagasakiKen, Isahaya, 138078, 65029, 73049
+42203, NagasakiKen, Shimabara, 45436, 20999, 24437
+42202, NagasakiKen, Sasebo, 255439, 120198, 135241
+42201, NagasakiKen, Nagasaki, 429508, 198716, 230792
 print list. items = 21
 ===== Print End =====
-City ID?42307
-the city was found at 7
+City ID?42308
+the city was found at 6
+42308, NagasakiKen, Togitsu, 29804, 14326, 15478
+City Name?Togitsu
+the city was found at 6
+42308, NagasakiKen, Togitsu, 29804, 14326, 15478        
+===== Start Printing =====
+42411, NagasakiKen, ShinKamigoto, 19718, 9197, 10521    
+42391, NagasakiKen, Sasa, 13626, 6426, 7200
+42383, NagasakiKen, Ojika, 2560, 1172, 1388
+42323, NagasakiKen, Hasami, 14891, 7079, 7812
+42322, NagasakiKen, Kawatana, 14067, 6656, 7411
+42321, NagasakiKen, HigashiSonogi, 8298, 3886, 4412     
 42307, NagasakiKen, Nagayo, 42548, 20090, 22458
-City Name?Saikai
-the city was found at 10
+42214, NagasakiKen, MinamiShimabara, 46535, 21574, 24961
+42213, NagasakiKen, Unzen, 44115, 20847, 23268
 42212, NagasakiKen, Saikai, 28691, 14032, 14659
-free list. items = 21
+42211, NagasakiKen, Goto, 37327, 17339, 19988
+42210, NagasakiKen, Iki, 27103, 12860, 14243
+42209, NagasakiKen, Tsushima, 31457, 15361, 16096
+42208, NagasakiKen, Matsuura, 23309, 11164, 12145
+42207, NagasakiKen, Hirado, 31920, 14874, 17046
+42205, NagasakiKen, Omura, 92757, 43938, 48819
+42204, NagasakiKen, Isahaya, 138078, 65029, 73049
+42203, NagasakiKen, Shimabara, 45436, 20999, 24437
+42202, NagasakiKen, Sasebo, 255439, 120198, 135241
+42201, NagasakiKen, Nagasaki, 429508, 198716, 230792
+print list. items = 20
+===== Print End =====
+free list. items = 20
 
 ```
 
