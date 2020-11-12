@@ -79,6 +79,29 @@ int LoadData(City arrayCity[])
 void BubbleSort(City arrayCity[], int size)
 {
     //  ここを実装する
+    City tempCity;
+    int tempCount;
+    int pos;
+
+    while(1)
+    {
+        tempCount=0;
+        for (pos = 0; pos < size-1; pos++)
+        {
+            if (arrayCity[pos].total > arrayCity[pos+1].total)
+            {
+                tempCity = arrayCity[pos];
+                arrayCity[pos] = arrayCity[pos+1];
+                arrayCity[pos+1] = tempCity;
+
+                tempCount++;    //カウントを進める
+            }
+        }
+
+        if (tempCount ==0)
+            break;
+
+    }
 
 }
 
