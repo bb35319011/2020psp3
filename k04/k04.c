@@ -98,9 +98,8 @@ void BubbleSort(City arrayCity[], int size)
             }
         }
 
-        if (tempCount ==0)
+        if (tempCount == 0)
             break;
-
     }
 
 }
@@ -109,7 +108,50 @@ void BubbleSort(City arrayCity[], int size)
 void QuickSort(City arrayCity[], int left, int right)
 {
     //  ここを実装する
+    int pos;
+    City tempCity;
 
+    int i=left;
+    int j=right;
+    int povit=left;
+
+    while (left <= right)//要素が一つ以上なら実行
+    {
+        for (pos = left; pos <= right ; pos++)
+        {
+            if(arrayCity[pos].seafood>arrayCity[povit].seafood)
+            {
+                i=pos;
+                break;
+            }
+        }
+        for (pos = right; pos >=left; pos--)
+        {
+            if (arrayCity[pos].seafood<=arrayCity[povit].seafood)
+            {
+                j=pos;
+                break;
+            }
+        }
+
+        if(i>=j || i==povit)//ポビットとjを入れ替える条件
+        {
+            tempCity=arrayCity[povit];
+            arrayCity[povit]=arrayCity[j];
+            arrayCity[j]=tempCity;
+
+            QuickSort(arrayCity,left,j-1);  //ポビットより小さい部分のソート
+            QuickSort(arrayCity,j+1,right); //ポビットよりも大きい部分のソート
+            break;
+        }
+    
+        //iとjを入れ替えてくりかえす
+        tempCity=arrayCity[i];
+        arrayCity[i]=arrayCity[j];
+        arrayCity[j]=tempCity;
+    
+    }
+    
 }
 
 
