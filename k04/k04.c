@@ -86,7 +86,7 @@ void BubbleSort(City arrayCity[], int size)
     while(1)
     {
         tempCount=0;
-        for (pos = 0; pos < size-1; pos++)
+        for (pos = 0; pos < (size-1)-pos; pos++)
         {
             if (arrayCity[pos].total > arrayCity[pos+1].total)
             {
@@ -113,13 +113,13 @@ void QuickSort(City arrayCity[], int left, int right)
 
     int i=left;
     int j=right;
-    int povit=left;
+    int pivot=left;
 
     while (left <= right)//要素が一つ以上なら実行
     {
         for (pos = left; pos <= right ; pos++)
         {
-            if(arrayCity[pos].seafood>arrayCity[povit].seafood)
+            if(arrayCity[pos].seafood>arrayCity[pivot].seafood)
             {
                 i=pos;
                 break;
@@ -127,21 +127,21 @@ void QuickSort(City arrayCity[], int left, int right)
         }
         for (pos = right; pos >=left; pos--)
         {
-            if (arrayCity[pos].seafood<=arrayCity[povit].seafood)
+            if (arrayCity[pos].seafood<=arrayCity[pivot].seafood)
             {
                 j=pos;
                 break;
             }
         }
 
-        if(i>=j || i==povit)//ポビットとjを入れ替える条件
+        if(i>=j || i==pivot)//ピボットとjを入れ替える条件
         {
-            tempCity=arrayCity[povit];
-            arrayCity[povit]=arrayCity[j];
+            tempCity=arrayCity[pivot];
+            arrayCity[pivot]=arrayCity[j];
             arrayCity[j]=tempCity;
 
-            QuickSort(arrayCity,left,j-1);  //ポビットより小さい部分のソート
-            QuickSort(arrayCity,j+1,right); //ポビットよりも大きい部分のソート
+            QuickSort(arrayCity,left,j-1);  //ピボットより小さい部分のソート
+            QuickSort(arrayCity,j+1,right); //ピボットよりも大きい部分のソート
             break;
         }
     
