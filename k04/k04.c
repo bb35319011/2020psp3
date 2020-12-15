@@ -86,7 +86,7 @@ void BubbleSort(City arrayCity[], int size)
     while(1)
     {
         tempCount=0;
-        for (pos = 0; pos < size-1; pos++)
+        for (pos = 0; pos < (size-1)-pos; pos++)
         {
             if (arrayCity[pos].total > arrayCity[pos+1].total)
             {
@@ -113,13 +113,13 @@ void QuickSort(City arrayCity[], int left, int right)
 
     int i=left;
     int j=right;
-    int povit=left;
+    int pivot=left;
 
     while (left <= right)//要素が一つ以上なら実行
     {
         for (pos = left; pos <= right ; pos++)
         {
-            if(arrayCity[pos].seafood>arrayCity[povit].seafood)
+            if(arrayCity[pos].seafood>arrayCity[pivot].seafood)
             {
                 i=pos;
                 break;
@@ -127,21 +127,21 @@ void QuickSort(City arrayCity[], int left, int right)
         }
         for (pos = right; pos >=left; pos--)
         {
-            if (arrayCity[pos].seafood<=arrayCity[povit].seafood)
+            if (arrayCity[pos].seafood<=arrayCity[pivot].seafood)
             {
                 j=pos;
                 break;
             }
         }
 
-        if(i>=j || i==povit)//ポビットとjを入れ替える条件
+        if(i>=j || i==pivot)//ピボットとjを入れ替える条件
         {
-            tempCity=arrayCity[povit];
-            arrayCity[povit]=arrayCity[j];
+            tempCity=arrayCity[pivot];
+            arrayCity[pivot]=arrayCity[j];
             arrayCity[j]=tempCity;
 
-            QuickSort(arrayCity,left,j-1);  //ポビットより小さい部分のソート
-            QuickSort(arrayCity,j+1,right); //ポビットよりも大きい部分のソート
+            QuickSort(arrayCity,left,j-1);  //ピボットより小さい部分のソート
+            QuickSort(arrayCity,j+1,right); //ピボットよりも大きい部分のソート
             break;
         }
     
@@ -168,7 +168,84 @@ void MergeSort(City arrayCity[], int left, int right)
 {
     //  チャレンジ問題2
     //  ここを実装する
+    int mid;
+    int i,j,k;
+    // City* right_buff;
+    // City* left_buff;
+    City right_buff[256];
+    City left_buff[256];
 
+    if (left < right)
+    {
+        mid = left+(right-left)/2;
+        //printf("%d, %d :mid%d\n",left,right,mid);
+
+        MergeSort(arrayCity,left,mid);
+        MergeSort(arrayCity,mid+1,right);
+
+        //printf("marge:%d-%d\n",left,right);
+
+        //   right_buff= malloc(sizeof(City)*(mid-left+1));
+        //   left_buff = malloc(sizeof(City)*(right-mid));
+        //配列コピー
+        for (i = 0; i < mid-left+1; i++)
+        {
+            left_buff[i] = arrayCity[left+i];
+        }
+        for (j = 0; j < right-mid; j++)
+        {
+            right_buff[j] = arrayCity[mid+1+j];
+        }
+       
+    //    //-------------------------------------
+    //     for (int i = 0; i < mid-left+1; i++)
+    //     {
+    //         printf("left_buf[%d]=%d\n",i,left_buff[i].liquor);
+    //     }
+    //     for (int j = 0; j < right-mid; j++)
+    //     {
+    //         printf("right_buf[%d]=%d\n",j,right_buff[j].liquor);
+    //     }
+    //    //-------------------------------------    
+        
+
+        i=0;
+        j=0;
+        for( k=0; k < right-left+1; k++ )
+        {
+            if(i<(mid-left+1) && j<(right-mid))
+            {
+                if(left_buff[i].liquor < right_buff[j].liquor)
+                {
+                    arrayCity[left+k]=left_buff[i];
+                    i++;
+                }else{
+                    arrayCity[left+k]=right_buff[j];
+                    j++;
+                }
+            }else{
+                if(i<(mid-left+1))
+                {
+                    arrayCity[left+k]=left_buff[i];
+                    i++;
+                }else{
+                    arrayCity[left+k]=right_buff[j];
+                    j++;
+                }
+            }
+        }
+
+        // printf("marged%d-%d:",left,right);
+        // for (int index = 0; index < (right-left+1); index++)
+        // {
+        //     printf("%d, ",arrayCity[left+index].liquor);
+        // }
+        // printf("\n");
+        
+
+        //  free(right_buff);
+        //  free(left_buff);      
+     }
 }
 
 int main(void)
@@ -193,7 +270,8 @@ int main(void)
     QuickSort(arrayCity, 0, MAX_CITY - 1);
     PrintArray(arrayCity, MAX_CITY);
    
-//    MergeSort(arrayCity, 0, MAX_CITY - 1);
+   printf("===== Sorted by MergeSort =====\n");
+    MergeSort(arrayCity, 0, MAX_CITY - 1);
 //    HeapSort(arrayCity, MAX_CITY);
     PrintArray(arrayCity, MAX_CITY);
 
