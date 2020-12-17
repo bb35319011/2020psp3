@@ -1,5 +1,5 @@
 # 課題5 レポート
-学生番号　氏名
+bb35319011  江島奨悟
 
 
 ## 課題
@@ -97,8 +97,25 @@ int AdjacencyMatrix[MAX_STATIONS][MAX_STATIONS] = {
 - 幅優先探索のルート表示(10点)
 
 ## ソースコードの説明
+DepthFirstSearch関数
+    int hold:popした駅のインデックスを保持する変数
+    int* visited:訪れたかどうかを判断するための配列
 
+    visitedの配列をsize分確保して、すべて0に初期化
+    スタックを初期化してstartのインデックスをpush
+    スタックが空になるまで以下の処理を繰り返す
+    1.スタックから値を取り出す。訪れた場所であればcontinue。
+    2.訪れていない場合隣接するノードをスタックにpushする。
 
+BreadthFirstSearch関数 
+    int hold:popした駅のインデックスを保持する変数
+    int* visited:訪れたかどうかを判断するための配列
+
+    visitedの配列をsize分確保して、すべて0に初期化
+    キューを初期化してstartのインデックスをenqueue
+    キューが空になるまで以下の処理を繰り返す
+    1.キューから値を取り出す。訪れた場所であればcontinue。
+    2.訪れていない場合隣接するノードをスタックにenqueueする。
 
 ## 出力結果
 
