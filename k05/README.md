@@ -120,6 +120,25 @@ BreadthFirstSearch関数
 ## 出力結果
 
 ```
+-DepthFirstSerch-
+visit:0-akasako
+visit:1-nagasakidaigakumae
+visit:2-nagasakiekimae    
+visit:6-shiminkaikan
+visit:7-hotarujaya
+visit:5-sofukuji
+visit:3-shinchichukagai
+visit:4-ishibashi
+
+-BreadthFirstSearch-
+visit:0-akasako
+visit:1-nagasakidaigakumae
+visit:2-nagasakiekimae
+visit:3-shinchichukagai
+visit:6-shiminkaikan
+visit:4-ishibashi
+visit:5-sofukuji
+visit:7-hotarujaya
 
 ```
 
