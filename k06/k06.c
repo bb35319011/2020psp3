@@ -69,10 +69,64 @@ int LoadData(Menu arrayItem[])
 void DynamicProgLimited(Menu arrayItem[], int items, int nap_size)
 {
     int nap_value[items+1][nap_size + 1];   //  動的計画法で作成するテーブル
-    int history[items+1][nap_size + 1];     //  履歴を保存するテーブル(選択したメニューを探すときに使用)
+    //int history[items+1][nap_size + 1];     //  履歴を保存するテーブル(選択したメニューを探すときに使用)
 
     //　ここを実装する
+    int i;
+    int j;
 
+    //nap_value初期化
+    for ( i = 0; i < items+1; i++)
+    {
+        for ( j = 0; j < nap_size+1; j++)
+        {
+            nap_value[i][j]=0;   
+            //history[i][j]=0;
+        }
+    }
+
+    for ( i = 1; i < items+1; i++)
+    {
+        for ( j = 0; j < arrayItem[i-1].price; j++)
+        {
+            nap_value[i][j] = nap_value[i-1][j];
+            //history[i][j] = j;
+        }
+        for (/*j:値引継ぎ*/; j < nap_size+1; j++)  
+        {
+            {
+                nap_value[i][j] = 
+                    (nap_value[i-1][j] > nap_value[i-1][j-arrayItem[i-1].price]+arrayItem[i-1].calorie)? 
+                        nap_value[i-1][j] : nap_value[i-1][j-arrayItem[i-1].price]+arrayItem[i-1].calorie;
+                //history[i][j] = j-arrayItem[i-1].price;
+            }  
+        }
+    }
+
+//nap_val表示-デバッグ
+    // for (int i = 0; i < items+1; i++)
+    // {
+    //     for (int j = 0; j < nap_size+1; j++)
+    //     {
+    //         printf("%2d, ",nap_value[i][j]);
+    //     }
+    //     printf("\n");
+    // }
+    
+
+    // //メニュー表示
+    // int j = nap_size;
+    // for (int i  = items; i>1; i--)
+    // {
+    //     if (history[i][j] != history[i-1][j])
+    //     {
+    //         j = history[i-1][j];
+    //         printf("%s, calorie:%d\n",arrayItem[i-1].name,arrayItem[i-1].calorie);
+    //     }
+    // }
+    
+    //最終カロリー
+    printf("answer:%d cal\n",nap_value[items][nap_size]);
 
 }
 
@@ -84,6 +138,10 @@ int main(void)
 
     arrayItem = (Menu*)malloc(sizeof(Menu) * NUM_ITEMS);
     cnt = LoadData(arrayItem);
+    
+//デバッグ    
+    // cnt = NUM_ITEMS;
+    // arrayItem =ArrayItem;
 
     //  動的プログラムで最大摂取カロリーを求める
     DynamicProgLimited(arrayItem, cnt, NAP_SIZE);
